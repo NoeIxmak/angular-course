@@ -12,7 +12,7 @@ export class PadreComponent implements OnInit {
 
   valor: string;
   mostrarHijo: boolean;
-  
+
   constructor() {
     this.valor = '';
     this.mostrarHijo = false;
@@ -20,6 +20,10 @@ export class PadreComponent implements OnInit {
 
   public btnMostrarClick() {
     this.mostrarHijo = true;
+  }
+
+  public btnOcultarClick() {
+    this.mostrarHijo = false;
   }
 
   public eventoRecepcionDato(valorRecepcion: string) {
