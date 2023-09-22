@@ -10,6 +10,7 @@ import { TresComponent } from './tres/tres.component';
 import { FormsModule } from '@angular/forms';
 import { PadreComponent } from './padre/padre.component';
 import { HijoComponent } from './padre/hijo/hijo.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { HijoComponent } from './padre/hijo/hijo.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
