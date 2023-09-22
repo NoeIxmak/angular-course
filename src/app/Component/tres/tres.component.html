@@ -1,0 +1,28 @@
+<h1>Ejemplo de uso de for</h1>
+
+<ul>
+    <li *ngFor="let numero of numeros; index as i">{{i}}.- {{numero}}</li>
+</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th>Indice</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let numero of numeros; let i = index trackBy: tracByFn">
+            <td>{{ i }}</td>
+            <td>
+                <span *ngIf="!textChange[i]">{{ numero }}</span>
+                <input type="text" id="txt_valor" *ngIf="textChange[i]" [(ngModel)]="numeros[i]" />
+            </td>
+            <td>
+                <button (click)="changeValue(i)" *ngIf="!textChange[i]" class="btn btn-primary">Cambiar valor</button>
+                <button (click)="saveValue(i,numeros[i])" *ngIf="textChange[i]" class="btn btn-primary">Guardar</button>
+                <button (click)="deleteValue(i)" class="btn btn-danger">ELiminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

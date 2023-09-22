@@ -1,0 +1,6 @@
+<h1>Uso de if</h1>
+
+<button id="btnMostrar" (click)="btnMostrar_Click();">Mostrar</button>
+
+<input type="text" id="txt_valor" *ngIf="mostrar" />
+<input type="text" id="txt_otro" [hidden]="!mostrar">
