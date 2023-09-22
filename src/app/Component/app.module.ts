@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { PadreComponent } from './padre/padre.component';
 import { HijoComponent } from './padre/hijo/hijo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComunicacionComponent } from './comunicacion/comunicacion.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DosComponent,
     TresComponent,
     PadreComponent,
-    HijoComponent
+    HijoComponent,
+    ComunicacionComponent
   ],
   imports: [
     BrowserModule,

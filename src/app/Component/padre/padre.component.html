@@ -7,8 +7,10 @@
             <button class="btn btn-primary" (click)="btnMostrarClick()">Enviar Datos</button>
         </div>
         <div class="col-sm-auto">
-            <button class="btn btn-secondary" (click)="btnOcultarClick()" [disabled]="!mostrarHijo">Ocultar Hijo</button>
+            <button class="btn btn-secondary" (click)="btnOcultarClick()" [disabled]="!mostrarHijo">Ocultar
+                Hijo</button>
         </div>
     </div>
     <app-hijo [parametro]="valor" (eventoMensaje)="eventoRecepcionDato($event)" *ngIf="mostrarHijo"></app-hijo>
+    <app-comunicacion></app-comunicacion>
 </div>
