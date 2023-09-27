@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { EventosService } from 'src/app/eventos.service';
+import { EventosService } from 'src/app/services/eventos.service';
 
 @Component({
   selector: 'app-hijo',
