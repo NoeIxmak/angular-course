@@ -58,9 +58,12 @@ export class PadreComponent implements OnInit {
           // debugger;
           alert("usuario valido")
           this.mostrarHijo = true
-          
+
+          let usuarioStr = JSON.stringify(usuario)
+
+          localStorage.setItem("usuario", usuarioStr)
           console.log("datos de respuesta:");
-          
+
         } else {
           alert(dato.mensaje)
         }
@@ -91,7 +94,7 @@ export class PadreComponent implements OnInit {
       }
     });
     console.log("continua");
-    
+
   }
 
   public eventoRecepcionDato(valorRecepcion: string) {
@@ -99,7 +102,7 @@ export class PadreComponent implements OnInit {
     alert("Valor recibido:" + valorRecepcion);
   }
 
-  public eventoOcularHijo(mostrar: boolean) {
+  public eventoOcultarHijo(mostrar: boolean) {
     this.mostrarHijo = mostrar;
   }
 
