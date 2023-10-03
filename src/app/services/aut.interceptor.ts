@@ -20,7 +20,7 @@ export class AutInterceptor implements HttpInterceptor {
       body: request.body,
       setHeaders: {
         'Content-Type': 'application/json',
-        'Authorization': 'token-examnple',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
       }
     })
     return next.handle(req);
