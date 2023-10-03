@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
 
-    URL_Peticiones: "https://localhost:44333/api/"
+    URL_Peticiones: "https://localhost:5000/api/"
 };

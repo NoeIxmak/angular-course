@@ -15,11 +15,16 @@ export class PeticionesService {
   constructor(private httpClient: HttpClient) { }
 
   public GetDatos(valor: string) {
+    
     return this.httpClient.get<ResponseModel>(this.Url + "PeticionesGet/" + valor).pipe(map(data => data));
   }
 
-  public ValidarUsuarios(usuario: Login) {
+  public ValidarUsuario(usuario: Login) {
     return this.httpClient.post<ResponseModel>(this.Url + "PeticionesPost", usuario).pipe(map(data => data));
+  }
+
+  public CambiarContraseña(usuario: Login) {
+    return this.httpClient.put<ResponseModel>(this.Url + "PeticionPuts", usuario);
   }
 
 }

@@ -42,7 +42,7 @@ export class HijoComponent implements OnInit, OnDestroy {
   }
 
   public btnRegresarClick() {
-    debugger;
+    // debugger;
     this.eventoOcultar.emit(false);
   }
 }

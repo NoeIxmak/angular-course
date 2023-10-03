@@ -20,57 +20,87 @@ export class PadreComponent implements OnInit {
   constructor(private servicio: PeticionesService) {
     this.valor = '';
     this.contrasenia = '';
-    this.valorGet = '';
     this.mostrarHijo = false;
+    this.valorGet = '';
+  }
+
+  public btnActualizarClick() {
+    let usuario = new Login();
+    usuario.usuario = this.valor;
+    usuario.contraseña = this.contrasenia;
+    this.servicio.CambiarContraseña(usuario).subscribe({
+      next: (dato) => {
+        if (dato.ok) {
+          alert("La contraseña se cambio a: " + (dato.datos as Login).contraseña);
+        }
+        else {
+          alert(dato.mensaje);
+        }
+      },
+      error: (error) => {
+        console.log("error:", error.message);
+        alert("Error comunicación:" + error.message);
+      }
+    })
   }
 
   public btnMostrarClick() {
-    this.mostrarHijo = true;
+    // this.mostrarHijo = true;
+
+    let usuario = new Login();
+    usuario.usuario = this.valor;
+    usuario.contraseña = this.contrasenia;
+
+    this.servicio.ValidarUsuario(usuario).subscribe({
+      next: (dato) => {
+        console.log("datos de respuesta:", dato);
+        if (dato.ok) {
+          // debugger;
+          alert("usuario valido")
+          this.mostrarHijo = true
+          
+          console.log("datos de respuesta:");
+          
+        } else {
+          alert(dato.mensaje)
+        }
+      },
+      error: (error) => { }
+    })
+
   }
 
-  public btnOcultarClick() {
-    this.mostrarHijo = false;
+  // public btnOcultarClick() {
+  //   this.mostrarHijo = false;
+  // }
+
+  // public eventoRecepcionDato(valorRecepcion: string) {
+  //   alert(`Valor recibido ${valorRecepcion}`);
+  // }
+
+  public peticionGet() {
+    // debugger
+    this.servicio.GetDatos(this.valorGet).subscribe({
+      next: (dato) => {
+        if (dato.ok) {
+          alert(dato.datos);
+        }
+      },
+      error: (error) => {
+        console.log("error:", error);
+      }
+    });
+    console.log("continua");
+    
   }
 
   public eventoRecepcionDato(valorRecepcion: string) {
-    alert(`Valor recibido ${valorRecepcion}`);
+    // debugger;
+    alert("Valor recibido:" + valorRecepcion);
   }
 
-
-let usuario = new Login();
-usuario.usuario = this.valor;
-usuario.contrasenia = this.contrasenia;
-
-this.servicio.ValidarUsuarios(usuario).subscribe({
-  next: (dato) => {
-    console.log("datos de respuesta:", dato);
-    if (dato.ok) {
-      alert("usuario valido")
-      this.mostrarHijo = true
-    } else {
-      alert(dato.mensaje)
-    }
-  },
-  error: (error) => { }
-})
-
-public peticionGet(){
-  this.servicio.GetDatos(this.valorGet).subscribe({
-    next:(dato)=>{
-      if (dato.ok) {
-        alert(dato.datos)
-      }
-    }
-  })
-}
-
-public eventoRecepcionDato(valorRecepcion: string){
-  debugger;
-  alert("Valor recibido:" + valorRecepcion);
-}
-
-public eventoOcularHijo(mostrar: boolean){
-  this.mostrarHijo = mostrar;
-}
+  public eventoOcularHijo(mostrar: boolean) {
+    this.mostrarHijo = mostrar;
+  }
 
 }
