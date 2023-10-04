@@ -17,7 +17,7 @@ export class PersonaAltaComponent implements OnInit {
       'nombre': ['', Validators.required],
       'apellidoPaterno': ['', Validators.required],
       'apellidoMaterno': ['', Validators.required],
-      'edad': ['', Validators.required]
+      'edad': [0, Validators.required]
     });
 
   }
@@ -34,7 +34,7 @@ export class PersonaAltaComponent implements OnInit {
 
       mensaje.mensaje = "Error en la captura";
       mensaje.tipo = "error";
-      this.eventosService.mostrarMensaje.next(mensaje);
+      // this.eventosService.mostrarMensaje.next(mensaje);
       this.formularioCaptura.markAllAsTouched();
 
       if (this.formularioCaptura.get("edad")?.value <= 17) {
@@ -45,7 +45,7 @@ export class PersonaAltaComponent implements OnInit {
       }
     } else {
       mensaje.mensaje = "Datos correctos!!";
-      mensaje.tipo = "succes";
+      mensaje.tipo = "success";
       this.eventosService.mostrarMensaje.next(mensaje);
     }
 

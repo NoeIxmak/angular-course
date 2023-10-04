@@ -7,7 +7,7 @@ import { PrincipalComponent } from './principal/principal.component';
 import { UnoComponent } from './uno/uno.component';
 import { DosComponent } from './dos/dos.component';
 import { TresComponent } from './tres/tres.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PadreComponent } from './padre/padre.component';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { HijoComponent } from './padre/hijo/hijo.component';
@@ -23,7 +23,11 @@ import { MatTableModule } from '@angular/material/table';
 import { AutInterceptor } from '../services/aut.interceptor';
 import { SplitterModule } from 'primeng/splitter';
 import { MessagesModule } from 'primeng/messages';
-
+import { PersonaAltaComponent } from './persona-alta/persona-alta/persona-alta.component';
+import { PanelModule } from 'primeng/panel';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,7 @@ import { MessagesModule } from 'primeng/messages';
     HijoComponent,
     ComunicacionComponent,
     PersonasComponent,
+    PersonaAltaComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,11 @@ import { MessagesModule } from 'primeng/messages';
     MatTableModule,
     SplitterModule,
     MessagesModule,
+    PanelModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    InputNumberModule,
+    ButtonModule,
   ],
   providers: [
     provideAnimations(), {

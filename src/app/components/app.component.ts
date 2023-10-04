@@ -15,9 +15,10 @@ export class AppComponent implements OnDestroy {
   bloquear: boolean = false;
   constructor(private eventoServices: EventosService, private messageService: MessageService) {
     this.subscription = eventoServices.mostrarMensaje.subscribe((valor) => {
-      this.messageService.add({ severity: valor.tipo, summary: 'Application', detail: valor.mensaje, life: 1000 });
+      this.messageService.add({ severity: valor.tipo, summary: 'Application', detail: valor.mensaje });
       setTimeout(() => {
         this.bloquear = false;
+        this.messageService.clear();
       }, 3000);
     });
   };
