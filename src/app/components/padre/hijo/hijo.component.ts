@@ -22,7 +22,7 @@ export class HijoComponent implements OnInit, OnDestroy {
     this.valorHijo = '';
     this.myEventSubscription = eventoService.cambioValor.subscribe((valor) => {
       this.mostrarControl = valor;
-    })
+    });
   }
 
   ngOnInit(): void {

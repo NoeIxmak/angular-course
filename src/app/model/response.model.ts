@@ -5,8 +5,8 @@ export class ResponseModel {
     public mensaje: string;
 
     constructor() {
-        this.ok = true
-        this.datos = null
-        this.mensaje = ''
+        this.ok = true;
+        this.datos = null;
+        this.mensaje = '';
     }
 }

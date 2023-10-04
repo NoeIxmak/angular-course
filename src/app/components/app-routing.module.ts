@@ -7,7 +7,6 @@ import { TresComponent } from './tres/tres.component';
 import { PadreComponent } from './padre/padre.component';
 
 const routes: Routes = [
-  { path: '', component: PrincipalComponent },
   { path: 'uno', component: UnoComponent },
   { path: 'dos', component: DosComponent },
   { path: 'tres', component: TresComponent },

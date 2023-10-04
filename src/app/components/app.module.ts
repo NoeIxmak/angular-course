@@ -17,9 +17,13 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from "@angular/material/icon"
-import { MatButtonModule } from "@angular/material/button"
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { MatTableModule } from '@angular/material/table';
 import { AutInterceptor } from '../services/aut.interceptor';
+import { SplitterModule } from 'primeng/splitter';
+import { MessagesModule } from 'primeng/messages';
+
 
 @NgModule({
   declarations: [
@@ -43,6 +47,9 @@ import { AutInterceptor } from '../services/aut.interceptor';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatTableModule,
+    SplitterModule,
+    MessagesModule,
   ],
   providers: [
     provideAnimations(), {

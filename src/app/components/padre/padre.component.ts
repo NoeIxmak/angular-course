@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Login } from 'src/app/model/login.model';
+import { Mensaje } from 'src/app/model/mensaje.model';
+import { EventosService } from 'src/app/services/eventos.service';
 import { PeticionesService } from 'src/app/services/peticiones.service';
 
 @Component({
@@ -9,7 +11,6 @@ import { PeticionesService } from 'src/app/services/peticiones.service';
 })
 export class PadreComponent implements OnInit {
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   valor: string;
@@ -17,7 +18,7 @@ export class PadreComponent implements OnInit {
   valorGet: string;
   mostrarHijo: boolean;
 
-  constructor(private servicio: PeticionesService) {
+  constructor(private servicio: PeticionesService, private eventoService: EventosService) {
     this.valor = '';
     this.contrasenia = '';
     this.mostrarHijo = false;
@@ -41,7 +42,7 @@ export class PadreComponent implements OnInit {
         console.log("error:", error.message);
         alert("Error comunicación:" + error.message);
       }
-    })
+    });
   }
 
   public btnMostrarClick() {
@@ -55,21 +56,22 @@ export class PadreComponent implements OnInit {
       next: (dato) => {
         console.log("datos de respuesta:", dato);
         if (dato.ok) {
-          // debugger;
-          alert("usuario valido")
-          this.mostrarHijo = true
+          debugger;
+          alert("usuario valido");
+          this.mostrarHijo = true;
 
-          let usuarioStr = JSON.stringify(usuario)
+          let usuarioStr = JSON.stringify(usuario);
 
-          localStorage.setItem("usuario", usuarioStr)
+          localStorage.setItem("usuario", usuarioStr);
+          sessionStorage.setItem("usuario", usuarioStr);
           console.log("datos de respuesta:");
 
         } else {
-          alert(dato.mensaje)
+          alert(dato.mensaje);
         }
       },
       error: (error) => { }
-    })
+    });
 
   }
 
@@ -83,17 +85,30 @@ export class PadreComponent implements OnInit {
 
   public peticionGet() {
     // debugger
-    this.servicio.GetDatos(this.valorGet).subscribe({
-      next: (dato) => {
-        if (dato.ok) {
-          alert(dato.datos);
-        }
-      },
-      error: (error) => {
-        console.log("error:", error);
-      }
-    });
-    console.log("continua");
+    let mensaje = new Mensaje();
+    mensaje.mensaje = "Peticion get";
+    mensaje.tipo = "success";
+    this.eventoService.mostrarMensaje.next(mensaje);
+
+    let usuarioStr = localStorage.getItem("usuario");
+
+    if (usuarioStr != null) {
+      let usu = JSON.parse(usuarioStr) as Login;
+      console.log("mi usuario recuperado", usu);
+    }
+
+    // alert("Mi valor:" + usuarioStr);
+    // this.servicio.GetDatos(this.valorGet).subscribe({
+    //   next: (dato) => {
+    //     if (dato.ok) {
+    //       alert(dato.datos);
+    //     }
+    //   },
+    //   error: (error) => {
+    //     console.log("error:", error);
+    //   }
+    // });
+    // console.log("continua");
 
   }
 

@@ -1,1 +1,13 @@
-<router-outlet></router-outlet>
+<div class="containe-fluid">
+    <p-splitter [style]="{'height': 'auto'}" [panelSizes]="[20, 80]">
+        <ng-template pTemplate>
+            <app-principal></app-principal>
+        </ng-template>
+        <ng-template pTemplate>
+            <div class="container">
+                <p-messages></p-messages>
+                <router-outlet></router-outlet>
+            </div>
+        </ng-template>
+    </p-splitter>
+</div>

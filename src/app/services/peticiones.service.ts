@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
-import { HttpClient } from '@angular/common/http'
-import { ResponseModel } from '../model/response.model'
+import { HttpClient } from '@angular/common/http';
+import { ResponseModel } from '../model/response.model';
 import { map } from 'rxjs';
-import { Login } from '../model/login.model'
+import { Login } from '../model/login.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PeticionesService {
 
-  Url = environment.URL_Peticiones + "Peticiones/"
+  Url = environment.URL_Peticiones + "Peticiones/";
 
   constructor(private httpClient: HttpClient) { }
 

@@ -1,32 +1,72 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Persona } from 'src/app/model/persona.model';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-tres',
   templateUrl: './tres.component.html',
   styleUrls: ['./tres.component.css']
 })
-export class TresComponent {
-  numeros: number[] = [1, 2, 3, 4, 5];
-  textChange: boolean[] = new Array(this.numeros.length).fill(false);
+export class TresComponent implements OnInit {
+  numeros: number[];
+  ediciones: boolean[] = [false, false, false, false];
 
-  // public mostrarAlerta(numero: number) {
-  //   alert(`Has presionado el número ${numero}`);
-  // }
 
-  public changeValue(index: number) {
-    this.textChange[index] = !this.textChange[index];
+  valor: string = '';
+
+  displayColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+
+  public valorParametro: number;
+  indiceSeleccionado: number;
+  private sub: any;
+
+  personas: Persona[];
+  dataSource: any;
+  columnas: string[] = ['id', 'nombre', 'apellidoPaterno', 'apellidoMaterno', 'edad'];
+
+  columnasArreglo: string[] = ['valor', 'indice', 'editar', 'eliminar'];
+  constructor(private route: ActivatedRoute) {
+    this.personas = new Array();
+    this.valorParametro = 0;
+    this.indiceSeleccionado = 0;
+
+    this.numeros = new Array();
+    for (let index = 0; index < 10; index++) {
+      let persona = new Persona();
+      persona.id = index;
+      persona.nombre = "Nombre " + index;
+      persona.apellidoPaterno = "Paterno " + index;
+      persona.apellidoMaterno = "Materno " + index;
+      persona.edad = index;
+      this.personas.push(persona);
+      this.numeros.push(index);
+    }
+    this.dataSource = new MatTableDataSource(this.personas);
   }
 
-  public saveValue(index: number, newNumber: number) {
-    this.numeros[index] = newNumber;
-    this.textChange[index] = !this.textChange[index];
+
+
+
+  ngOnInit(): void {
+
+    this.sub = this.route.params.subscribe(params => {
+      debugger;
+      this.valorParametro;
+    });
   }
 
-  public deleteValue(index: number) {
-    this.numeros.splice(index, 1);
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  tracByFn(index: any, item: any) {
+  public btnSeleccionar(indice: number) {
+    this.ediciones[indice] = !this.ediciones[indice];
+    this.indiceSeleccionado = indice;
+  }
+
+  trackByFn(index: any, item: any) {
     return index;
   }
 }
