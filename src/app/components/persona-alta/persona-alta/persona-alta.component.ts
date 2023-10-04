@@ -42,11 +42,11 @@ export class PersonaAltaComponent implements OnInit {
         mensaje.tipo = "error";
         this.eventosService.mostrarMensaje.next(mensaje);
         this.formularioCaptura.get("edad")?.setErrors({ "incorrect": true });
-      } else {
-        mensaje.mensaje = "Datos correctos!!";
-        mensaje.tipo = "succes";
-        this.eventosService.mostrarMensaje.next(mensaje);
       }
+    } else {
+      mensaje.mensaje = "Datos correctos!!";
+      mensaje.tipo = "succes";
+      this.eventosService.mostrarMensaje.next(mensaje);
     }
 
   }
