@@ -12,14 +12,12 @@ export class PersonaAltaComponent implements OnInit {
   formularioCaptura: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private eventosService: EventosService) {
-
     this.formularioCaptura = formBuilder.group({
       'nombre': ['', Validators.required],
       'apellidoPaterno': ['', Validators.required],
       'apellidoMaterno': ['', Validators.required],
       'edad': [0, Validators.required]
     });
-
   }
 
   ngOnInit(): void {

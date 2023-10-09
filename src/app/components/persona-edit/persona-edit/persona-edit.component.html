@@ -1,0 +1,52 @@
+<div class="container">
+    <p-panel header="Alta de personas">
+        <form [formGroup]="formularioCaptura">
+            <div class="row mt-2">
+                <div class="col-2">
+                    <label for="nombre" class="block">Nombre</label>
+                </div>
+                <div class="col-4">
+                    <input id="nombre" formControlName="nombre" type="text" pInputText> <br>
+                    <small *ngIf="!formularioCaptura.get('nombre')?.valid && formularioCaptura.get('nombre')?.touched"
+                        class="p-error block">Nombre es requerido</small>
+                </div>
+
+            </div>
+            <div class="row mt-2">
+                <div class="col-2">
+                    <label for="apellidoPaterno" class="block">Apellido Paterno</label>
+                </div>
+                <div class="col-4">
+                    <input id="apellidoPaterno" formControlName="apellidoPaterno" type="text" pInputText>
+                </div>
+
+            </div>
+            <div class="row mt-2">
+                <div class="col-2">
+                    <label for="apellidoMaterno" class="block">Apellido Materno</label>
+                </div>
+                <div class="col-4">
+                    <input id="apellidoMaterno" formControlName="apellidoMaterno" type="text" pInputText>
+                </div>
+
+            </div>
+            <div class="row mt-2">
+                <div class="col-2">
+                    <label for="edad">Edad</label>
+                </div>
+                <div class="col-4">
+                    <p-inputNumber id="edad" formControlName="edad"></p-inputNumber> <br>
+                    <small *ngIf="!formularioCaptura.get('edad')?.valid && formularioCaptura.get('edad')?.touched"
+                        class="p-error block">Edad debe ser mayor a 18 años</small>
+                </div>
+
+            </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <button pButton type="button" label="Guardar" class="p-button-raised"
+                        (click)="btnGuardarClick()"></button>
+                </div>
+            </div>
+        </form>
+    </p-panel>
+</div>

@@ -1,16 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Persona } from 'src/app/model/persona.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { MessageService } from 'primeng/api';
+import { PersonaAltaComponent } from '../persona-alta/persona-alta/persona-alta.component';
+import { EventosService } from 'src/app/services/eventos.service';
+import { PersonaEditComponent } from '../persona-edit/persona-edit/persona-edit.component';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-tres',
   templateUrl: './tres.component.html',
   styleUrls: ['./tres.component.css']
 })
-export class TresComponent implements OnInit {
+export class TresComponent implements OnInit, OnDestroy {
   numeros: number[];
   ediciones: boolean[] = [false, false, false, false];
+  personaSubscription: Subscription | undefined;
 
 
   valor: string = '';
@@ -23,10 +31,12 @@ export class TresComponent implements OnInit {
 
   personas: Persona[];
   dataSource: any;
-  columnas: string[] = ['id', 'nombre', 'apellidoPaterno', 'apellidoMaterno', 'edad'];
+  columnas: string[] = ['id', 'nombre', 'apellidoPaterno', 'apellidoMaterno', 'edad', 'edit'];
 
   columnasArreglo: string[] = ['valor', 'indice', 'editar', 'eliminar'];
-  constructor(private route: ActivatedRoute) {
+
+
+  constructor(private route: ActivatedRoute, private dialogService: DialogService, public messageService: MessageService, private eventosService: EventosService) {
     this.personas = new Array();
     this.valorParametro = 0;
     this.indiceSeleccionado = 0;
@@ -69,4 +79,74 @@ export class TresComponent implements OnInit {
   trackByFn(index: any, item: any) {
     return index;
   }
+
+  // numeross: number[] = [1, 2, 3, 4, 5];
+  // textChange: boolean[] = new Array(this.numeross.length).fill(false);
+
+  // public changeValue(index: number) {
+  //   this.textChange[index] = !this.textChange[index];
+  // }
+
+  // public deleteValue(index: number) {
+  //   this.numeros.splice(index, 1);
+  // }
+  // public saveValue(index: number, newNumber: number) {
+  //   this.numeros[index] = newNumber;
+  //   this.textChange[index] = !this.textChange[index];
+  // }
+
+
+  clonedProducts: { [s: string]: Persona; } = {};
+
+
+  onRowEditInit(persona: Persona) {
+    this.clonedProducts[persona.id] = { ...persona };
+  }
+
+  onRowEditSave(persona: Persona) {
+
+  }
+
+  onRowEditCancel(persona: Persona, index: number) {
+    this.personas[index] = this.clonedProducts[persona.id];
+    delete this.clonedProducts[persona.id];
+  }
+
+
+  ref: DynamicDialogRef | undefined;
+
+  show(id: number) {
+    this.eventosService.editPersona.next(this.personas[id]);
+    this.ref = this.dialogService.open(PersonaEditComponent, {
+      header: 'Choose a Product',
+      width: '70%',
+      contentStyle: { "overflow": "auto" },
+      baseZIndex: 10000,
+      maximizable: true
+    });
+
+    this.ref.onClose.subscribe((product: Persona) => {
+      if (product) {
+        this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.nombre });
+      }
+    });
+
+    this.ref.onMaximize.subscribe((value: any) => {
+      this.messageService.add({ severity: 'info', summary: 'Maximized', detail: `maximized: ${value.maximized}` });
+    });
+
+    this.personaSubscription = this.eventosService.editPersona.subscribe((valor => {
+      this.personas[id].nombre = valor.nombre;
+      this.personas[id].apellidoPaterno = valor.apellidoPaterno;
+      this.personas[id].apellidoMaterno = valor.apellidoMaterno;
+      this.personas[id].edad = valor.edad;
+    }));
+  }
+
+  ngOnDestroy() {
+    if (this.ref) {
+      this.ref.close();
+    }
+  }
+
 }

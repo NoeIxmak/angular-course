@@ -28,6 +28,11 @@ import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { PersonaEditComponent } from './persona-edit/persona-edit/persona-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +46,7 @@ import { ButtonModule } from 'primeng/button';
     ComunicacionComponent,
     PersonasComponent,
     PersonaAltaComponent,
+    PersonaEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,13 +66,17 @@ import { ButtonModule } from 'primeng/button';
     InputTextModule,
     InputNumberModule,
     ButtonModule,
+    TableModule,
+    ToastModule,
+    DynamicDialogModule,
   ],
   providers: [
     provideAnimations(), {
       provide: HTTP_INTERCEPTORS,
       useClass: AutInterceptor,
       multi: true,
-    }
+    },
+    DialogService,
   ],
   bootstrap: [AppComponent]
 })
